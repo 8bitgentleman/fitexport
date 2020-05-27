@@ -123,3 +123,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+credentials.json
+data-backup-script-26433c1b157e.json
+
+# exports
+exports/
+getsteps.py
+secrets.py
+token.pickle
