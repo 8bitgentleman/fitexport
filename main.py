@@ -70,11 +70,12 @@ def main():
                 datasets(). \
                 get(userId='me', dataSourceId=s['dataStreamId'], datasetId=DATA_SET). \
                 execute()
-            data_list.append(dataset)
+            saveJSON("segments/" + s['dataStreamId'], dataset)
+            # data_list.append(dataset)
         except Exception as e:
             print("Error at " + s['dataStreamId'])
             print(e)
-    saveJSON("dataset", data_list)
+    # saveJSON("dataset", data_list)
 
 
 if __name__ == '__main__':
