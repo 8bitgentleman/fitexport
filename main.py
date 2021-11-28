@@ -2,7 +2,7 @@
 from __future__ import print_function
 import json
 import time
-from os import path
+from os import path, makedirs
 import pickle
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -62,6 +62,10 @@ def main():
 
     saveJSON("dataSources", data_sources)
 
+    # create subdir for datastreams
+    timestamp = str(time.time_ns())
+    makedirs(f"exports/segments/{timestamp}") 
+
     data_list = []
     for index, s in enumerate(data_sources['dataSource']):
 
@@ -70,7 +74,8 @@ def main():
                 datasets(). \
                 get(userId='me', dataSourceId=s['dataStreamId'], datasetId=DATA_SET). \
                 execute()
-            saveJSON("segments/" + s['dataStreamId'], dataset)
+            # saveJSON("segments/" + s['dataStreamId'], dataset)
+            saveJSON( f"segments/{timestamp}/{s['dataStreamId']}", dataset)
             # data_list.append(dataset)
         except Exception as e:
             print("Error at " + s['dataStreamId'])
